@@ -1,0 +1,2 @@
+module LinkWordingsHelper
+end
