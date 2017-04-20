@@ -12,23 +12,29 @@ class UrlImportsController < ApplicationController
     csv_text = params[:data_file].tempfile
     csv = CSV.parse(csv_text, :headers => true)
     ary = Array.new
+    cn = 0
     csv.each do |item|
-    	check_product = FetProductUrl.find_by_guid(item[1].to_i)
-    	check_product.destroy if check_product.present?
-    	product_url = FetProductUrl.new
-    	product_url.name = item[0].to_s
-    	product_url.guid = item[1].to_i
-    	product_url.product_pc_url = item[2].to_s
-    	product_url.product_mobi_url = item[3].to_s
-    	product_url.review_pc_url = item[4].to_s
-    	product_url.review_mobi_url = item[5].to_s
-    	product_url.status = item[6].to_i
-    	product_url.save!
-    	ary << item[0]
+      item.each_with_index { |d,i| cn -= 1 if item[i] == ( "" and nil)} 
+      if cn == 0
+      	check_product = FetProductUrl.find_by_guid(item[1].to_i)
+      	check_product.destroy if check_product.present?
+      	product_url = FetProductUrl.new
+      	product_url.name = item[0].to_s
+      	product_url.guid = item[1].to_i
+      	product_url.product_pc_url = item[2].to_s
+      	product_url.product_mobi_url = item[3].to_s
+      	product_url.review_pc_url = item[4].to_s
+      	product_url.review_mobi_url = item[5].to_s
+      	product_url.status = item[6].to_i
+      	product_url.save!
+      	ary << item[0]
+      end
     end
-    redirect_to :action => :index
+    @product_info = ary
+    render :action => "index"
   end
   def url_params
     params.require(:data_file)
   end
+
 end

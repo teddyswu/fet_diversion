@@ -16,7 +16,7 @@ class LinkWordingsController < ApplicationController
 	private
 
 	def event_params
-	  params.require(:fet_link_wording).permit(:review_wording, :product_wording)
+	  params.require(:fet_link_wording).permit(:review_wording, :product_wording, :brand_wording)
 	end
 
 end
