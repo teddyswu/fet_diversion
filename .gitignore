@@ -18,6 +18,7 @@ config/s3.yml
 config/authorization_key.yml
 config/schedule_timer.yml
 config/newrelic.yml
+config/secrets.yml
 config/counter.yml
 
 # Ignore all logfiles and tempfiles.
