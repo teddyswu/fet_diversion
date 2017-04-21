@@ -15,7 +15,8 @@ class UrlImportsController < ApplicationController
     cn = 0
     csv.each do |item|
       item.each_with_index { |d,i| cn -= 1 if item[i] == ( "" and nil)} 
-      if cn == 0
+      cp = FProduct.find_by_id(item[1].to_i)
+      if cn == 0 && cp.present?
       	check_product = FetProductUrl.find_by_guid(item[1].to_i)
       	check_product.destroy if check_product.present?
       	product_url = FetProductUrl.new
@@ -27,6 +28,12 @@ class UrlImportsController < ApplicationController
       	product_url.review_mobi_url = item[5].to_s
       	product_url.status = item[6].to_i
       	product_url.save!
+        cps = ProductFetShip.find_by_product_id(cp.product_id)
+        cps.destroy if cps.present?
+        product_fet_ship = ProductFetShip.new
+        product_fet_ship.product_id = cp.product_id
+        product_fet_ship.guid = item[1].to_i
+        product_fet_ship.save!
       	ary << item[0]
       end
     end

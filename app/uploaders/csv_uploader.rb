@@ -19,7 +19,7 @@ class CsvUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "cvs_uploads/#{Time.now.year}/#{Time.now.month}/#{Time.now.day}"
+    "cvs_uploads/#{Time.now.month}/#{Time.now.day}/#{Time.now.strftime("%Y%m%d%H%M%S")}#{rand(9999)}"
   end
 
   def extension_white_list
