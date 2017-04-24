@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :link_wordings
   resources :url_imports
   resources :product_infos
+  resources :brand_infos
+  post 'product_search', :to => 'product_infos#search'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

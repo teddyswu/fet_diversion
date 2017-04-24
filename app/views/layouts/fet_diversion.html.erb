@@ -64,51 +64,10 @@
 			  <ul class="nav navbar-top-links navbar-right">
 			    <li class="dropdown">
 			      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-			      </a>
-			      <ul class="dropdown-menu dropdown-tasks">
-			        <li>
-			          <a href="#">
-			            <div>
-			              <p>
-			                <strong>歷程分析</strong>
-			                <span class="pull-right text-muted">2:00 A.M.</span>
-			              </p>
-			              <div class="progress progress-striped active">
-			                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100" style="width: 9%">
-			                  <span class="sr-only">2:00 A.M.</span>
-			                </div>
-			              </div>
-			            </div>
-			          </a>
-			        </li>
-			        <li class="divider"></li>
-			        <li>
-			          <a href="#">
-			            <div>
-			              <p>
-			                <strong>客群分析</strong>
-			                <span class="pull-right text-muted">4:00 A.M.</span>
-			              </p>
-			              <div class="progress progress-striped active">
-			                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100" style="width: 18%">
-			                  <span class="sr-only">4:00 A.M.</span>
-			                </div>
-			              </div>
-			            </div>
-			          </a>
-			        </li>
-			        <li class="divider"></li>
-			      </ul>
-			      <!-- /.dropdown-tasks -->
-			    </li>
-			    <!-- /.dropdown -->
-			    <li class="dropdown">
-			      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
 			      </a>
 			      <ul class="dropdown-menu dropdown-user">
-			        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+			        <li><a href="/users/edit"><i class="fa fa-user fa-fw"></i> User Profile</a>
 			        </li>
 			        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
 			        </li>
@@ -128,6 +87,9 @@
 			        </li>
 			        <li>
 			          <%= link_to "<i class='fa fa-info fa-fw'></i>既有產品資訊".html_safe, product_infos_path %>
+			        </li>
+			        <li>
+			          <%= link_to "<i class='fa fa-book fa-fw'></i>既有品牌資訊".html_safe, brand_infos_path %>
 			        </li>
 			        <li>
 			          <%= link_to "<i class='fa fa-file-word-o fa-fw'></i>頁面文案調整".html_safe, link_wordings_path %>

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">既有品牌資訊</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<div class="col-lg-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">品牌列表</div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>brand</th>
+              <th>路徑(電腦)</th>
+              <th>路徑(手機)</th>
+              <th>狀態</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<% @fet_brands.each do |fet_brand|%>
+	            <tr>
+	              <td><%= fet_brand.guid %></td>
+	              <td><%= fet_brand.name %></td>
+	              <td><%= fet_brand.pc_url %></td>
+	              <td><%= fet_brand.mobi_url%></td>
+	              <td><%= fet_brand.status %></td>
+	            </tr>
+	          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.table-responsive -->
+    </div>
+    <!-- /.panel-body -->
+  </div>
+  <!-- /.panel -->
+</div>
