@@ -12,6 +12,7 @@ class UrlImportsController < ApplicationController
     csv_text = params[:data_file].tempfile
     csv = CSV.parse(csv_text, :headers => true)
     ary = Array.new
+    can_p = Array.new
     cn = 0
     csv.each do |item|
       item.each_with_index { |d,i| cn -= 1 if item[i] == ( "" and nil)} 
@@ -35,9 +36,12 @@ class UrlImportsController < ApplicationController
         product_fet_ship.guid = item[1].to_i
         product_fet_ship.save!
       	ary << item[0]
+      else
+        can_p << item[0]
       end
     end
     @product_info = ary
+    @product_cant = can_p
     render :action => "index"
   end
   def url_params
