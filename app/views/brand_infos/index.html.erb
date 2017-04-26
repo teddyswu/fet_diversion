@@ -23,8 +23,8 @@
           <tbody>
           	<% @fet_brands.each do |fet_brand|%>
 	            <tr>
-	              <td><%= fet_brand.guid %></td>
-	              <td><%= fet_brand.name %></td>
+	              <td><%= fet_brand.id %></td>
+	              <td><%= fet_brand.brand.name_normal %></td>
 	              <td><%= fet_brand.pc_url %></td>
 	              <td><%= fet_brand.mobi_url%></td>
 	              <td><%= fet_brand.status %></td>
