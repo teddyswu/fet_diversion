@@ -12,11 +12,15 @@ class UrlImportsController < ApplicationController
     csv_text = params[:data_file].tempfile
     csv = CSV.parse(csv_text, :headers => true)
     ary = Array.new
-    can_p = Array.new
-    cn = 0
+    null_product = Array.new
+    guid_product = Array.new
     csv.each do |item|
+      cn = 0
+      p item.inspect
       item.each_with_index { |d,i| cn -= 1 if item[i] == ( "" and nil)} 
       cp = FProduct.find_by_id(item[1].to_i)
+      p cn 
+      p "======="  
       if cn == 0 && cp.present?
       	check_product = FetProductUrl.find_by_guid(item[1].to_i)
       	check_product.destroy if check_product.present?
@@ -37,11 +41,14 @@ class UrlImportsController < ApplicationController
         product_fet_ship.save!
       	ary << item[0]
       else
-        can_p << item[0]
+        null_product << item[0] if cn != 0
+        guid_product << item[0] if cp.blank?
       end
     end
     @product_info = ary
-    @product_cant = can_p
+    @null_product = null_product
+    @guid_product = guid_product
+
     render :action => "index"
   end
   def url_params
