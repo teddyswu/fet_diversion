@@ -16,11 +16,8 @@ class UrlImportsController < ApplicationController
     guid_product = Array.new
     csv.each do |item|
       cn = 0
-      p item.inspect
       item.each_with_index { |d,i| cn -= 1 if item[i] == ( "" and nil)} 
-      cp = FProduct.find_by_id(item[1].to_i)
-      p cn 
-      p "======="  
+      cp = FProduct.find_by_id(item[1].to_i) 
       if cn == 0 && cp.present?
       	check_product = FetProductUrl.find_by_guid(item[1].to_i)
       	check_product.destroy if check_product.present?
