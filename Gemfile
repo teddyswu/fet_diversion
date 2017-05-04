@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'nokogiri','1.6'
 
+gem "iconv", "~> 1.0.3"
+
 gem "carrierwave"               # 上傳圖片必要套件
 gem "mini_magick", "3.6.0"      # 圖片處理的套件(縮圖、浮水印)
 gem 'devise', '~> 3.5.7'

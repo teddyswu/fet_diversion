@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 class UrlImportsController < ApplicationController
 	require 'csv'
 	skip_before_filter  :verify_authenticity_token
@@ -9,12 +10,15 @@ class UrlImportsController < ApplicationController
   	cvs_upload = CsvUpload.new
   	cvs_upload.file = url_params
     cvs_upload.save!
+    ic = Iconv.new("utf-8", "big5")
     csv_text = params[:data_file].tempfile
     csv = CSV.parse(csv_text, :headers => true)
     ary = Array.new
     null_product = Array.new
     guid_product = Array.new
     csv.each do |item|
+      p ic.iconv(item[0])
+      p "0000"
       cn = 0
       item.each_with_index { |d,i| cn -= 1 if item[i] == ( "" and nil)} 
       cp = FProduct.find_by_id(item[1].to_i) 
@@ -22,7 +26,7 @@ class UrlImportsController < ApplicationController
       	check_product = FetProductUrl.find_by_guid(item[1].to_i)
       	check_product.destroy if check_product.present?
       	product_url = FetProductUrl.new
-      	product_url.name = item[0].to_s
+      	product_url.name = ic.iconv(item[0].to_s)
       	product_url.guid = item[1].to_i
       	product_url.product_pc_url = item[2].to_s
       	product_url.product_mobi_url = item[3].to_s
@@ -36,10 +40,10 @@ class UrlImportsController < ApplicationController
         product_fet_ship.product_id = cp.product_id
         product_fet_ship.guid = item[1].to_i
         product_fet_ship.save!
-      	ary << item[0]
+      	ary << ic.iconv(item[0].to_s)
       else
-        null_product << item[0] if cn != 0
-        guid_product << item[0] if cp.blank?
+        null_product << ic.iconv(item[0].to_s) if cn != 0
+        guid_product << ic.iconv(item[0].to_s) if cp.blank?
       end
     end
     @product_info = ary
